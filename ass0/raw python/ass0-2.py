@@ -6,7 +6,7 @@
 import cv2
 import numpy as np
 # =====
-def pixops(path: str = "/input.png") -> None:
+def pixops(path: str = "input.png") -> None:
     """
     Creates two files, output1.png (euclidian distance) and output2.png (blackout square), from a given file.
 
@@ -43,8 +43,8 @@ def pixops(path: str = "/input.png") -> None:
                 new_blackout[xcoord][ycoord] = img[xcoord][ycoord] # Leave it alone
 
     # Step 4: Write both images out
-    cv2.imwrite("C:\\Users\\Will\\Desktop\\Project Folder\\sandbox\\cs4783\\ass0\\output1.png", new_euclid)
-    cv2.imwrite("C:\\Users\\Will\\Desktop\\Project Folder\\sandbox\\cs4783\\ass0\\output2.png", new_blackout)
+    cv2.imwrite("output1.png", new_euclid)
+    cv2.imwrite("output2.png", new_blackout)
     return
 
 # =====
