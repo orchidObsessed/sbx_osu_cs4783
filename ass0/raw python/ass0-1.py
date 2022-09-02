@@ -5,9 +5,9 @@
 # =====
 import numpy as np
 import matplotlib.pyplot as plt
-from typing import Tuple
+from typing import Tuple # Sad import :(
 # =====
-def histo(path: str = "/test.txt") -> Tuple[dict, np.array]:
+def histo(path: str = "test.txt") -> Tuple[dict, np.array]:
     """
     Read a text file and convert it to a histogram as a Python dictionary, and a `NumPy` array.
 
