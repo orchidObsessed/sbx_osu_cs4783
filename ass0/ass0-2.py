@@ -6,7 +6,7 @@
 import cv2
 import numpy as np
 # =====
-def pixops(path: str = "input.png") -> None:
+def pixops(path: str = "/input.png") -> None:
     """
     Creates two files, output1.png (euclidian distance) and output2.png (blackout square), from a given file.
 
