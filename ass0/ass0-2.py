@@ -49,4 +49,4 @@ def pixops(path: str = "input.png") -> None:
 
 # =====
 if __name__ == "__main__":
-    pixops("C:\\Users\\Will\\Desktop\\Project Folder\\sandbox\\cs4783\\ass0\\input.png")
+    pixops()

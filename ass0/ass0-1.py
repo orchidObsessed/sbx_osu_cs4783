@@ -57,4 +57,4 @@ def histo(path: str = "test.txt") -> tuple[dict, np.array]:
 
 # =====
 if __name__ == "__main__":
-    histo("C:\\Users\\Will\\Desktop\\Project Folder\\sandbox\\cs4783\\ass0\\test.txt")
+    histo()
