@@ -31,7 +31,7 @@ mono = False # Whether to print using color (written logs never use color)
 # Logger vars
 vwrite = 3 # Highest verbosity level to write at
 logqueue = []
-logpath = "logs/" # Where to write logs to
+logpath = "" # Where to write logs to
 isNew = True # Indicates whether to print linebreak for new execution time
 # ===== < BODY > =====
 def log(verbosity: int, message: int):
