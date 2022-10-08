@@ -5,6 +5,7 @@ from sbx_osu_cs4783.ass2.helpers import sapilog as sl
 from sbx_osu_cs4783.ass2.neural import layer
 import numpy as np
 from random import randint
+from typing import Dict, List, Tuple
 
 VALIDATA, VALILABEL = None, None
 
@@ -39,7 +40,7 @@ class NNetwork:
         return
 
     @sl.sapiDumpOnExit
-    def train(self, train_data: list[np.array], label_data: list[np.array], c_func: callable, q_c_func: callable, batch_size: int, n_epochs: int, learning_rate=0.1, report_freq=1):
+    def train(self, train_data: List[np.array], label_data: List[np.array], c_func: callable, q_c_func: callable, batch_size: int, n_epochs: int, learning_rate=0.1, report_freq=1):
         """
         Train the network using stochastic gradient descent.
 
@@ -164,7 +165,7 @@ class NNetwork:
         sl.log(4, f"Weights: {self._weights}")
         return
 
-    def evaluate(self, val_data: list[np.array], label_data: list[np.array], c_func: callable, threshold: float = 0.1) -> float:
+    def evaluate(self, val_data: List[np.array], label_data: List[np.array], c_func: callable, threshold: float = 0.1) -> float:
         """
         Return the accuracy of the network over a labeled validation set.
         """

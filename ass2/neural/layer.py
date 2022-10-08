@@ -3,6 +3,7 @@
 # ===== < IMPORTS & CONSTANTS > =====
 from sbx_osu_cs4783.ass2.helpers import sapilog as sl
 import numpy as np
+from typing import Dict, List, Tuple
 
 # ===== < BODY > =====
 class Layer:
@@ -49,7 +50,7 @@ class Flatten(Layer):
     """
     Flattening layer; takes an input of a given dimension and reshapes it to a column vector
     """
-    def __init__(self, size: int, dim: tuple[int]):
+    def __init__(self, size: int, dim: Tuple[int]):
         self._indim = dim
         self.b = None
         self._outdim = (size, 1)
