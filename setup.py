@@ -6,7 +6,7 @@ setup(
         url="https://github.com/orchidObsessed/sbx-osu-cs4783",
         author="William \"Waddles\" Waddell",
         license="None",
-        packages=["ass2.helpers", "ass2.neural", ],
+        packages=["helpers", "neural", ],
         include_package_data=True,
         install_requires=["gym", "numpy", "opencv-python", "pillow"]
 )
