@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 sl.vtalk = 4
 sl.vwrite = 4
 
-globalpath = "C:\\Users\\willi\\Desktop\\Atom Container\\sbx-osu-cs4783\\ass2\\"
+globalpath = "C:\\Users\\willi\\Desktop\\Atom Container\\sbx-osu-cs4783\\ass2\\" #emabrrassing global path cause my env sucks
 x_train, y_train = list(np.loadtxt(globalpath + "X_train.csv")), list(np.loadtxt(globalpath + "Y_train.csv"))
 x_test, y_test = list(np.loadtxt(globalpath + "X_test.csv")), list(np.loadtxt(globalpath + "Y_test.csv"))
 
