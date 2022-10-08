@@ -6,6 +6,8 @@ from neural import layer
 import numpy as np
 from random import randint
 
+VALIDATA, VALILABEL = None, None
+
 # ===== < BODY > =====
 class NNetwork:
     """
@@ -62,6 +64,10 @@ class NNetwork:
         """
         # Step 0: Set up local variables and log
         avg_loss = 0
+
+        cost_per_epoch = [] # Used for question 4, to plot loss
+        acc_per_epoch = [] # Used for question 4, to plot accuracy
+
         sl.log(3, f"Beginning training with {len(train_data)} samples over {n_epochs} epochs, using batch size {batch_size} and a learning rate of {learning_rate}")
 
         # Step 1: Main training loop
@@ -84,10 +90,15 @@ class NNetwork:
                 loss = c_func(activations[-1], y)
                 avg_loss += loss
 
+                # ===== < QUESTION 4 > =====
+                cost_per_epoch.append(loss)
+                acc_per_epoch.append(self.evaluate(VALIDATA, VALILABEL, c_func))
+
                 # Step 1d: Calculate gradient for output layer
                 sample_w_grad, sample_b_grad = [], []
 
                 local_gradient = q_c_func(activations[-1], y)
+
                 del_w = activations[-2] @ local_gradient
                 del_b = local_gradient
 
@@ -123,7 +134,7 @@ class NNetwork:
         print(f"{n_epochs}/{n_epochs} | [" + "="*(int(n_epochs / report_freq)+1) + "]")
         sl.log(2, f"Training complete with an average loss per epoch: {avg_loss/n_epochs}")
 
-        return
+        return cost_per_epoch, acc_per_epoch
 
     # +----------------+
     # |   Accessors    |
@@ -165,7 +176,6 @@ class NNetwork:
             cost = c_func(guess, y)
             avg_cost += cost/len(val_data)
             if cost <= threshold: n_correct += 1
-            else: sl.log(1, f"Expected {y}, got {guess} | cost = {cost}")
 
         sl.log(3, f"{n_correct} out of {len(label_data)} samples were within cost threshold {threshold}, for a total accuracy of {n_correct/len(label_data)} and an average cost of {avg_cost}")
 
