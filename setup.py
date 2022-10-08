@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-        name="ass2_overture",
+        name="ass2",
         version="0.1",
         url="https://github.com/orchidObsessed/sbx-osu-cs4783",
         author="William \"Waddles\" Waddell",
