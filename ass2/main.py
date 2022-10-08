@@ -1,24 +1,25 @@
 # ===== < IMPORTS & CONSTANTS > =====
 ! git clone https://github.com/orchidObsessed/sbx_osu_cs4783.git
-from helpers import algebra as alg # Math
-from helpers import sapilog as sl
-from neural import * # ML stuff
+from sbx_osu_cs4783.ass2.helpers import algebra as alg # Math
+from sbx_osu_cs4783.ass2.helpers import sapilog as sl
+from sbx_osu_cs4783.ass2.neural import * # ML stuff
 import numpy as np
 import matplotlib.pyplot as plt
-sl.vtalk = 3 # Log print level (0=fail, 1=warn, 2=good, 3=info, 4=dbug)
+sl.vtalk = 2 # Log print level (don't set this to 3 or higher, it will be spammy; check logfile if curious)
 sl.vwrite = 4 # Log outfile level
 x_train, y_train = list(np.loadtxt("X_train.csv")), list(np.loadtxt("Y_train.csv"))
 x_test, y_test = list(np.loadtxt("X_test.csv")), list(np.loadtxt("Y_test.csv"))
 network.VALIDATA = x_test
 network.VALILABEL = y_test
+n_epochs = 100
 
 # ===== < MAIN > =====
 model = network.NNetwork()
 model += layer.Flatten(2, (2, 1)) # Input layer
-model += layer.Layer(2, alg.sigmoid, alg.q_sigmoid) # Hidden layer
+# model += layer.Layer(2, alg.sigmoid, alg.q_sigmoid) # Hidden layer
 model += layer.Layer(1, alg.identity, alg.q_identity) # Output layer
 
-cost_per_epoch, acc_per_epoch = model.train(x_train, y_train, alg.mse, alg.q_mse, 1, 50, learning_rate=.01, report_freq=100)
+cost_per_epoch, acc_per_epoch = model.train(x_train, y_train, alg.mse, alg.q_mse, 1, n_epochs, learning_rate=.01, report_freq=100)
 model.evaluate(x_test, y_test, alg.mse)
 model.tell_params()
 
@@ -31,7 +32,7 @@ model.tell_params()
 
 # 4.
 fig, (top, bot) = plt.subplots(2)
-x = list(range(0, 50))
+x = list(range(0, n_epochs))
 fig.suptitle('Question #4 - Accuracy (top) and Cost (bot) per epoch')
 top.plot(x, acc_per_epoch)
 bot.plot(x, cost_per_epoch)
