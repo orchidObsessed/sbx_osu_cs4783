@@ -15,6 +15,7 @@ x_test, y_test = list(np.loadtxt(globalpath + "X_test.csv")), list(np.loadtxt(gl
 network.VALIDATA = x_test
 network.VALILABEL = y_test
 
+#-
 # ===== < MAIN > =====
 model = network.NNetwork()
 model += layer.Flatten(2, (2, 1)) # Input layer
@@ -25,6 +26,7 @@ cost_per_epoch, acc_per_epoch = model.train(x_train, y_train, alg.mse, alg.q_mse
 model.evaluate(x_test, y_test, alg.mse)
 model.tell_params()
 
+#-
 # ===== < DISCUSSION > =====
 # 1. I chose the identity activation function for the output layer. I chose this activation because it varies on (-inf, inf), and the output also seems to vary on a large (*potentially* infinite) range. If I chose an activation function like ReLU, Sigmoid, etc., it would be stuck at a minimum of 0, which would not be able to represent all the data.
 
