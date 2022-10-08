@@ -11,7 +11,7 @@ x_train, y_train = list(np.loadtxt("X_train.csv")), list(np.loadtxt("Y_train.csv
 x_test, y_test = list(np.loadtxt("X_test.csv")), list(np.loadtxt("Y_test.csv"))
 network.VALIDATA = x_test
 network.VALILABEL = y_test
-n_epochs = 100
+n_epochs = 50
 
 # ===== < MAIN > =====
 model = network.NNetwork()
@@ -19,7 +19,7 @@ model += layer.Flatten(2, (2, 1)) # Input layer
 # model += layer.Layer(2, alg.sigmoid, alg.q_sigmoid) # Hidden layer
 model += layer.Layer(1, alg.identity, alg.q_identity) # Output layer
 
-cost_per_epoch, acc_per_epoch = model.train(x_train, y_train, alg.mse, alg.q_mse, 1, 50, learning_rate=.1, report_freq=100)
+cost_per_epoch, acc_per_epoch = model.train(x_train, y_train, alg.mse, alg.q_mse, 1, n_epochs, learning_rate=0.1, report_freq=100)
 model.evaluate(x_test, y_test, alg.mse)
 model.tell_params()
 
