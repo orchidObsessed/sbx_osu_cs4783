@@ -1,12 +1,12 @@
 # ===== < IMPORTS & CONSTANTS > =====
+! git clone https://github.com/orchidObsessed/sbx_osu_cs4783.git
 from helpers import algebra as alg # Math
 from helpers import sapilog as sl
 from neural import * # ML stuff
 import numpy as np
 import matplotlib.pyplot as plt
-
-sl.vtalk = 4
-sl.vwrite = 4
+sl.vtalk = 3 # Log print level (0=fail, 1=warn, 2=good, 3=info, 4=dbug)
+sl.vwrite = 4 # Log outfile level
 x_train, y_train = list(np.loadtxt("X_train.csv")), list(np.loadtxt("Y_train.csv"))
 x_test, y_test = list(np.loadtxt("X_test.csv")), list(np.loadtxt("Y_test.csv"))
 network.VALIDATA = x_test
