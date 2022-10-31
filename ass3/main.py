@@ -15,31 +15,62 @@ print(f"Expected: {in_shape}\n Actual : {x_train.shape}")
 
 # Build models
 conv_model_increasing = keras.Sequential([keras.layers.Input(shape=in_shape),
-                                          keras.layers.Conv2D(filters=32, kernel_size=2, activation="relu"),
-                                          keras.layers.Conv2D(filters=64, kernel_size=2, activation="relu"),
-                                          keras.layers.Conv2D(filters=96, kernel_size=2, activation="relu"),
-                                          keras.layers.MaxPooling2D(pool_size=2, strides=2, padding="same"),
-                                          keras.layers.Conv2D(filters=128, kernel_size=2, activation="relu"),
-                                          keras.layers.Conv2D(filters=256, kernel_size=2, activation="relu"),
-                                          keras.layers.Conv2D(filters=384, kernel_size=2, activation="relu"),
-                                          keras.layers.MaxPooling2D(pool_size=2, strides=2, padding="same"),
-                                          keras.layers.Conv2D(filters=512, kernel_size=2, activation="relu"),
-                                          keras.layers.Conv2D(filters=1024, kernel_size=2, activation="relu"),
-                                          keras.layers.Conv2D(filters=1536, kernel_size=2, activation="relu"),
-                                          keras.layers.MaxPooling2D(pool_size=2, strides=2, padding="same"),
+                                          keras.layers.Conv2D(filters=32, kernel_size=3, activation="relu"),
+                                          keras.layers.Conv2D(filters=64, kernel_size=3, activation="relu"),
+                                          keras.layers.Conv2D(filters=96, kernel_size=3, activation="relu"),
+                                          keras.layers.MaxPooling2D(pool_size=2, strides=1, padding="same"),
+                                          keras.layers.Conv2D(filters=128, kernel_size=3, activation="relu"),
+                                          keras.layers.Conv2D(filters=256, kernel_size=3, activation="relu"),
+                                          keras.layers.Conv2D(filters=384, kernel_size=3, activation="relu"),
+                                          keras.layers.MaxPooling2D(pool_size=2, strides=1, padding="same"),
+                                          keras.layers.Conv2D(filters=512, kernel_size=3, activation="relu"),
+                                          keras.layers.Conv2D(filters=1024, kernel_size=3, activation="relu"),
+                                          keras.layers.Conv2D(filters=1536, kernel_size=3, activation="relu"),
+                                          keras.layers.MaxPooling2D(pool_size=2, strides=1, padding="same"),
                                           keras.layers.Flatten(),
                                           keras.layers.Dense(10, activation="softmax")])
-
 conv_model_increasing.summary()
-conv_model_decreasing = None
-vae_model = None
+
+conv_model_decreasing = keras.Sequential([keras.layers.Input(shape=in_shape),
+                                          keras.layers.Conv2D(filters=1536, kernel_size=3, activation="relu"),
+                                          keras.layers.Conv2D(filters=1024, kernel_size=3, activation="relu"),
+                                          keras.layers.Conv2D(filters=512, kernel_size=3, activation="relu"),
+                                          keras.layers.MaxPooling2D(pool_size=2, strides=1, padding="same"),
+                                          keras.layers.Conv2D(filters=384, kernel_size=3, activation="relu"),
+                                          keras.layers.Conv2D(filters=256, kernel_size=3, activation="relu"),
+                                          keras.layers.Conv2D(filters=128, kernel_size=3, activation="relu"),
+                                          keras.layers.MaxPooling2D(pool_size=2, strides=1, padding="same"),
+                                          keras.layers.Conv2D(filters=96, kernel_size=3, activation="relu"),
+                                          keras.layers.Conv2D(filters=64, kernel_size=3, activation="relu"),
+                                          keras.layers.Conv2D(filters=32, kernel_size=3, activation="relu"),
+                                          keras.layers.MaxPooling2D(pool_size=2, strides=1, padding="same"),
+                                          keras.layers.Flatten(),
+                                          keras.layers.Dense(10, activation="softmax")])
+conv_model_decreasing.summary()
+
+vae_model = keras.Sequential([keras.layers.Input(shape=in_shape),
+                                          keras.layers.Conv2D(filters=32, kernel_size=3, activation="relu"),
+                                          keras.layers.Conv2D(filters=64, kernel_size=3, activation="relu"),
+                                          keras.layers.Conv2D(filters=96, kernel_size=3, activation="relu"),
+                                          keras.layers.MaxPooling2D(pool_size=2, strides=1, padding="same"),
+                                          keras.layers.Conv2D(filters=128, kernel_size=3, activation="relu"),
+                                          keras.layers.Conv2D(filters=256, kernel_size=3, activation="relu"),
+                                          keras.layers.Conv2D(filters=128, kernel_size=3, activation="relu"),
+                                          keras.layers.MaxPooling2D(pool_size=2, strides=1, padding="same"),
+                                          keras.layers.Conv2D(filters=96, kernel_size=3, activation="relu"),
+                                          keras.layers.Conv2D(filters=64, kernel_size=3, activation="relu"),
+                                          keras.layers.Conv2D(filters=32, kernel_size=3, activation="relu"),
+                                          keras.layers.MaxPooling2D(pool_size=2, strides=1, padding="same"),
+                                          keras.layers.Flatten(),
+                                          keras.layers.Dense(10, activation="softmax")])
+vae_model.summary()
 
 # Train models
-conv_model_increasing.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
-conv_model_increasing.fit(x_train, y_train, epochs=10, validation_split=0.1)
+vae_model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
+vae_model.fit(x_train, y_train, epochs=1, validation_split=0.1)
 
 # Evaluate models
-eval_score = conv_model_increasing.evaluate(x_test, y_test, verbose=0)
+eval_score = vae_model.evaluate(x_test, y_test, verbose=0)
 print(f"    Loss: {eval_score[0]}\nAccuracy: {eval_score[1]}")
 
 
