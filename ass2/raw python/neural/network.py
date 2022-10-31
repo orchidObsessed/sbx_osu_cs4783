@@ -1,8 +1,8 @@
 # ===== < INFO > =====
 
 # ===== < IMPORTS & CONSTANTS > =====
-from sbx_osu_cs4783.ass2.helpers import sapilog as sl
-from sbx_osu_cs4783.ass2.neural import layer
+from helpers import sapilog as sl
+from neural import layer
 import numpy as np
 from random import randint
 
